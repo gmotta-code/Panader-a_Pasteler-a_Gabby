@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masa & Esencia - Panadería y Pastelería Artesanal</title>
+  <!-- Tailwind CSS para utilidades rápidas de estructura -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts para tipografías vintage y legibles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons para componentes visuales -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* VARIABLES Y PALETA DE COLORES */
+    :root {
+      --wood-dark: #1e110a;
+      --wood-mid: #3a2214;
+      --wood-light: #5c3a21;
+      --leather-brown: #84522d;
+      --leather-dark: #472b15;
+      --gold-brass: #d4af37;
+      --brushed-metal: #a3a3a3;
+      --amber-glow: #ff9d00;
+      --cream-bg: #f9f5f0;
+    }
+
+    /* ESTILOS DE FUENTE */
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0f0b08;
+      color: #f3ece4;
+      overflow-x: hidden;
+    }
+    
+    .font-vintage {
+      font-family: 'Courier Prime', monospace;
+    }
+    
+    .font-serif-vintage {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* TEXTURAS Y ACABADOS ESQUEUMÓRFICOS */
+    
+    /* Textura de Madera de fondo */
+    .wood-texture {
+      background-color: #1a0f0a;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.5) 100%),
+        linear-gradient(90deg, rgba(20,10,5,0.5) 0%, rgba(40,20,10,0.5) 50%, rgba(20,10,5,0.5) 100%);
+      box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+    }
+
+    /* Panel de Metal Cepillado */
+    .brushed-metal-panel {
+      background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+      border: 3px solid #3a3a3a;
+      box-shadow: 
+        inset 1px 1px 1px rgba(255,255,255,0.2),
+        inset -1px -1px 1px rgba(0,0,0,0.4),
+        0 10px 25px rgba(0,0,0,0.6);
+      position: relative;
+    }
+    
+    .brushed-metal-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.01) 0px,
+        rgba(255, 255, 255, 0.01) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      border-radius: inherit;
+    }
+
+    /* Panel de Cuero Marrón */
+    .leather-panel {
+      background-color: var(--leather-brown);
+      background-image: radial-gradient(rgba(0,0,0,0.15) 1px, transparent 0);
+      background-size: 4px 4px;
+      border: 6px solid var(--leather-dark);
+      box-shadow: 
+        inset 0 4px 10px rgba(0,0,0,0.5),
+        0 12px 20px rgba(0,0,0,0.7);
+      position: relative;
+    }
+
+    /* Costuras de Cuero */
+    .leather-stitching {
+      position: absolute;
+      top: 6px; left: 6px; right: 6px; bottom: 6px;
+      border: 1px dashed rgba(255,220,180,0.4);
+      pointer-events: none;
+      border-radius: 4px;
+    }
+
+    /* Biseles de Cobre/Bronce */
+    .brass-bezel {
+      border: 2px solid #a37c3f;
+      background: linear-gradient(135deg, #e3c485 0%, #875c1d 50%, #4a2f00 100%);
+      box-shadow: 
+        inset 0 1px 3px rgba(255,255,255,0.4),
+        0 4px 8px rgba(0,0,0,0.6);
+    }
+
+    /* Botones Físicos 3D de Metal Cepillado (Estilo Consola de Audio) */
+    .button-3d {
+      background: linear-gradient(180deg, #5a5a5a 0%, #333333 100%);
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      box-shadow: 
+        0 6px 0px #181818, /* El grosor del botón 3D */
+        0 8px 15px rgba(0, 0, 0, 0.6), /* Sombra exterior */
+        inset 0 1px 1px rgba(255, 255, 255, 0.3); /* Brillo superior */
+      transition: all 0.1s ease;
+      transform: translateY(-4px);
+    }
+
+    .button-3d:active, .button-3d.active {
+      transform: translateY(2px);
+      box-shadow: 
+        0 0px 0px #181818,
+        0 2px 4px rgba(0,0,0,0.8),
+        inset 0 -2px 3px rgba(255,255,255,0.1),
+        inset 0 3px 5px rgba(0,0,0,0.7);
+    }
+
+    /* Botón de Empuje Redondo Retro */
+    .push-button-round {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #e06c6c, #a82323);
+      border: 3px solid #4a1010;
+      box-shadow: 
+        0 4px 0px #4d0000,
+        0 6px 10px rgba(0,0,0,0.5),
+        inset 0 1px 2px rgba(255,255,255,0.4);
+      transition: all 0.05s ease;
+    }
+    
+    .push-button-round:active, .push-button-round.active {
+      transform: translateY(3px);
+      box-shadow: 
+        0 1px 0px #4d0000,
+        0 2px 3px rgba(0,0,0,0.7),
+        inset 0 2px 5px rgba(0,0,0,0.8);
+      background: radial-gradient(circle at 35% 35%, #bf4343, #7a1414);
+    }
+
+    /* LED Vintage */
+    .vintage-led {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #551111, #110000);
+      box-shadow: 
+        inset 0 1px 2px rgba(0,0,0,0.8),
+        0 1px 1px rgba(255,255,255,0.1);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .vintage-led.active-red {
+      background: radial-gradient(circle at 35% 35%, #ff5252, #bd0000);
+      box-shadow: 
+        0 0 8px #ff5252,
+        0 0 15px #ff5252,
+        inset 0 1px 2px rgba(255,255,255,0.5);
+    }
+    
+    .vintage-led.active-amber {
+      background: radial-gradient(circle at 35% 35%, #ffb64d, #b36b00);
+      box-shadow: 
+        0 0 8px #ffb64d,
+        0 0 15px #ffb64d,
+        inset 0 1px 2px rgba(255,255,255,0.5);
+    }
+    
+    .vintage-led.active-green {
+      background: radial-gradient(circle at 35% 35%, #52ff52, #00bd00);
+      box-shadow: 
+        0 0 8px #52ff52,
+        0 0 15px #52ff52,
+        inset 0 1px 2px rgba(255,255,255,0.5);
+    }
+
+    /* Dial o Perilla Giratoria Esqueumórfica */
+    .vintage-dial-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+
+    .vintage-dial {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #555 0%, #222 100%);
+      border: 4px solid #333;
+      box-shadow: 
+        0 8px 12px rgba(0,0,0,0.6),
+        inset 0 2px 2px rgba(255,255,255,0.2),
+        inset 0 -2px 2px rgba(0,0,0,0.4);
+      cursor: grab;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      transition: transform 0.2s ease-out;
+      transform: rotate(0deg);
+    }
+
+    .vintage-dial::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 16px;
+      background-color: var(--amber-glow);
+      border-radius: 2px;
+      box-shadow: 0 0 5px var(--amber-glow);
+    }
+
+    /* Indicadores de dial graduado */
+    .dial-tick {
+      position: absolute;
+      width: 2px;
+      height: 6px;
+      background-color: #555;
+      transform-origin: 50% 50px;
+      left: 49px;
+      top: 2px;
+    }
+    
+    .dial-tick.active {
+      background-color: var(--amber-glow);
+      box-shadow: 0 0 3px var(--amber-glow);
+    }
+
+    /* Pantalla Digital Vintage / Nixie o VFD */
+    .nixie-display {
+      background-color: #0b0705;
+      border: 3px solid #2d1d13;
+      box-shadow: 
+        inset 0 3px 10px rgba(0,0,0,0.9),
+        0 2px 4px rgba(255,255,255,0.05);
+      border-radius: 4px;
+      color: #ff5500;
+      text-shadow: 
+        0 0 10px rgba(255, 85, 0, 0.8),
+        0 0 20px rgba(255, 85, 0, 0.4);
+      font-family: 'Courier Prime', monospace;
+    }
+
+    /* Interruptor de Palanca Vintage (Toggle Switch) */
+    .toggle-switch {
+      position: relative;
+      width: 40px;
+      height: 70px;
+      background: #111;
+      border-radius: 6px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.8), 0 1px 1px rgba(255,255,255,0.1);
+      border: 2px solid #333;
+    }
+    
+    .toggle-lever {
+      position: absolute;
+      left: 50%;
+      margin-left: -8px;
+      width: 16px;
+      height: 32px;
+      background: linear-gradient(180deg, #ddd, #777);
+      border-radius: 8px 8px 4px 4px;
+      box-shadow: 0 4px 5px rgba(0,0,0,0.5);
+      transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      top: 6px;
+    }
+    
+    .toggle-switch.on .toggle-lever {
+      top: 28px;
+      background: linear-gradient(180deg, #777, #fff);
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+    }
+
+    /* Caja contenedora para las rejillas de audio o calor de panadería */
+    .ventilation-grille {
+      background: repeating-linear-gradient(
+        0deg,
+        #111 0px,
+        #111 4px,
+        #2a2a2a 4px,
+        #2a2a2a 6px
+      );
+      border: 2px solid #1a1a1a;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+    }
+
+    /* Papel Antiguo Engomado (Para ticket o recibo) */
+    .vintage-receipt {
+      background-color: #f2ebd9;
+      background-image: radial-gradient(#dfd6bf 1px, transparent 0);
+      background-size: 8px 8px;
+      color: #382d24;
+      box-shadow: 
+        0 4px 15px rgba(0,0,0,0.4),
+        0 0 40px rgba(0,0,0,0.15) inset;
+      border: 1px solid #d5c8aa;
+    }
+
+    .torn-edge {
+      background-image: linear-gradient(-45deg, transparent 4px, #f2ebd9 4px), linear-gradient(45deg, transparent 4px, #f2ebd9 4px);
+      background-size: 8px 12px;
+      background-repeat: repeat-x;
+      height: 12px;
+      width: 100%;
+    }
+
+    /* Animación de Latido de Luz */
+    @keyframes warmGlow {
+      0%, 100% { opacity: 0.85; }
+      50% { opacity: 1; text-shadow: 0 0 15px rgba(255, 140, 0, 0.9), 0 0 25px rgba(255, 140, 0, 0.6); }
+    }
+    .warm-glowing-text {
+      animation: warmGlow 3s infinite ease-in-out;
+    }
+
+    /* Barra de Progreso Deslizadora Esqueumórfica (Fader) */
+    .fader-track {
+      background: #111;
+      border: 2px solid #333;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+      position: relative;
+    }
+    .fader-knob {
+      background: linear-gradient(145deg, #a3a3a3, #5a5a5a);
+      border: 1px solid #222;
+      box-shadow: 
+        0 4px 6px rgba(0,0,0,0.6),
+        inset 0 1px 1px rgba(255,255,255,0.4);
+      cursor: grab;
+      position: relative;
+    }
+    .fader-knob::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0; right: 0;
+      height: 2px;
+      background-color: #cc0000;
+      box-shadow: 0 0 3px #cc0000;
+    }
+
+    /* Personalización del scrollbar */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e110a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #5c3a21;
+      border: 3px solid #1e110a;
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #84522d;
+    }
+  </style>
+</head>
+<body class="wood-texture min-h-screen pb-16">
+
+  <!-- MARCO FRONTAL DE LA CONSOLA (Header Principal) -->
+  <header class="max-w-7xl mx-auto pt-8 px-4">
+    <div class="brushed-metal-panel rounded-xl p-6 mb-8 flex flex-col md:flex-row items-center justify-between border-b-8 border-neutral-900">
+      
+      <!-- Logo y título en latón cepillado -->
+      <div class="flex items-center gap-4 mb-4 md:mb-0">
+        <!-- Esfera retro o medidor analógico de presión (VU Meter) -->
+        <div class="w-20 h-20 rounded-full brass-bezel flex items-center justify-center p-1 relative overflow-hidden">
+          <div class="w-full h-full bg-[#1c140c] rounded-full flex flex-col items-center justify-end pb-2 relative">
+            <!-- Aguja del VU Meter -->
+            <div id="vu-needle" class="absolute w-1 h-14 bg-red-600 origin-bottom bottom-6 left-[38px] transition-transform duration-300 ease-out" style="transform: rotate(-45deg);"></div>
+            <span class="text-[8px] text-yellow-600 font-vintage absolute top-4">MASA %</span>
+            <div class="w-2 h-2 rounded-full bg-yellow-600 z-10"></div>
+          </div>
+        </div>
+        
+        <div>
+          <h1 class="font-serif-vintage text-3xl md:text-4xl text-amber-500 font-bold tracking-tight warm-glowing-text">
+            MASA & ESENCIA
+          </h1>
+          <p class="font-vintage text-xs text-neutral-400 tracking-widest uppercase">
+            Sabor Saludable • Fermentación Lenta • Cero Culpa
+          </p>
+        </div>
+      </div>
+
+      <!-- Selector de Modos / Frecuencia de Cocina -->
+      <div class="flex items-center gap-6 bg-black/40 px-6 py-4 rounded-lg border border-neutral-800">
+        <div class="text-right">
+          <span class="font-vintage text-xs text-neutral-400 block">ESTADO DEL HORNO</span>
+          <span class="font-vintage text-amber-500 text-sm font-bold tracking-wide">180°C CONTROL OK</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="text-center">
+            <div id="led-pan" class="vintage-led active-amber mx-auto mb-1"></div>
+            <span class="text-[9px] font-vintage text-neutral-400">PANADERÍA</span>
+          </div>
+          <div class="text-center ml-2">
+            <div id="led-pasteleria" class="vintage-led active-green mx-auto mb-1"></div>
+            <span class="text-[9px] font-vintage text-neutral-400">PASTELERÍA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL - TABLERO DE MANDOS -->
+  <main class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    
+    <!-- COLUMNA IZQUIERDA: MENÚS DE CONTROL (PANADERÍA Y PASTELERÍA) -->
+    <div class="lg:col-span-8 space-y-8">
+      
+      <!-- SECCIÓN PANADERÍA: MASA MADRE 100% (RESERVAS CON ANTICIPACIÓN) -->
+      <section class="leather-panel rounded-xl p-6">
+        <div class="leather-stitching"></div>
+        
+        <!-- Cabecera de módulo panadería -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b-2 border-neutral-800/40 pb-4 mb-6 relative z-10">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="bg-amber-800/80 text-amber-200 text-xs px-2.5 py-1 rounded font-vintage border border-amber-600">MASA MADRE</span>
+              <span class="bg-red-950 text-red-400 text-[10px] px-2 py-0.5 rounded font-vintage uppercase">Reserva Obligatoria (24h)</span>
+            </div>
+            <h2 class="font-serif-vintage text-2xl text-amber-100 mt-2">Horno de Masa Madre</h2>
+            <p class="text-xs text-amber-200/70 max-w-xl mt-1">Todos nuestros panes pasan por un proceso de fermentación de hasta 48 horas. Reserva tu pieza con anticipación para asegurar su horneado.</p>
+          </div>
+          
+          <div class="flex items-center gap-3 bg-black/30 p-2.5 rounded-lg border border-white/5">
+            <span class="text-[10px] font-vintage text-amber-400">PRE-HORNEADO:</span>
+            <div class="vintage-led active-amber" id="bake-status-led"></div>
+          </div>
+        </div>
+
+        <!-- Panel de Productos de Panadería con Controles Analógicos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+          
+          <!-- Item 1: Hogaza Rústica -->
+          <div class="brushed-metal-panel rounded-lg p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-serif-vintage text-lg text-neutral-100 font-bold">Hogaza Rústica Integral</h3>
+                <span class="nixie-display px-2 py-0.5 text-sm font-bold">$7.50</span>
+              </div>
+              <p class="text-xs text-neutral-400 mb-4">Trigo integral molido en piedra, hidratación al 80%. Sabor intenso y corteza extra crujiente.</p>
+            </div>
+            
+            <div class="flex justify-between items-center bg-black/40 p-2.5 rounded-md border border-neutral-800">
+              <span class="text-[10px] font-vintage text-neutral-400">SELECCIÓN</span>
+              <div class="flex items-center gap-2">
+                <button class="button-3d text-xs px-3 py-1 text-white uppercase font-vintage" onclick="agregarPan('Hogaza Rústica', 7.50)">
+                  Reservar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2: Pan de Semillas -->
+          <div class="brushed-metal-panel rounded-lg p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-serif-vintage text-lg text-neutral-100 font-bold">Hogaza de Semillas de Linaza y Girasol</h3>
+                <span class="nixie-display px-2 py-0.5 text-sm font-bold">$8.20</span>
+              </div>
+              <p class="text-xs text-neutral-400 mb-4">Mezcla súper nutritiva de semillas tostadas, miga elástica y gran aroma a frutos secos.</p>
+            </div>
+            
+            <div class="flex justify-between items-center bg-black/40 p-2.5 rounded-md border border-neutral-800">
+              <span class="text-[10px] font-vintage text-neutral-400">SELECCIÓN</span>
+              <div class="flex items-center gap-2">
+                <button class="button-3d text-xs px-3 py-1 text-white uppercase font-vintage" onclick="agregarPan('Hogaza de Semillas', 8.20)">
+                  Reservar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3: Baguette Sourdough -->
+          <div class="brushed-metal-panel rounded-lg p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-serif-vintage text-lg text-neutral-100 font-bold">Baguette Tradicional Masa Madre</h3>
+                <span class="nixie-display px-2 py-0.5 text-sm font-bold">$4.00</span>
+              </div>
+              <p class="text-xs text-neutral-400 mb-4">El clásico francés reinterpretado con fermentación salvaje. Ligero, alveolado y perfecto.</p>
+            </div>
+            
+            <div class="flex justify-between items-center bg-black/40 p-2.5 rounded-md border border-neutral-800">
+              <span class="text-[10px] font-vintage text-neutral-400">SELECCIÓN</span>
+              <div class="flex items-center gap-2">
+                <button class="button-3d text-xs px-3 py-1 text-white uppercase font-vintage" onclick="agregarPan('Baguette Sourdough', 4.00)">
+                  Reservar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4: Brioche Saludable -->
+          <div class="brushed-metal-panel rounded-lg p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-serif-vintage text-lg text-neutral-100 font-bold">Brioche de Masa Madre con Ghee</h3>
+                <span class="nixie-display px-2 py-0.5 text-sm font-bold">$9.00</span>
+              </div>
+              <p class="text-xs text-neutral-400 mb-4">Mantequilla clarificada (ghee) y endulzado sutilmente con néctar de agave orgánico.</p>
+            </div>
+            
+            <div class="flex justify-between items-center bg-black/40 p-2.5 rounded-md border border-neutral-800">
+              <span class="text-[10px] font-vintage text-neutral-400">SELECCIÓN</span>
+              <div class="flex items-center gap-2">
+                <button class="button-3d text-xs px-3 py-1 text-white uppercase font-vintage" onclick="agregarPan('Brioche Saludable', 9.00)">
+                  Reservar
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CONTROL DE FECHA DE ENTREGA (Estilo Dial / Selector Esqueumórfico) -->
+        <div class="mt-6 bg-black/30 p-4 rounded-lg border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+          <div class="flex items-center gap-4">
+            <i data-lucide="calendar" class="w-8 h-8 text-amber-500"></i>
+            <div>
+              <h4 class="font-serif-vintage text-amber-100 font-bold text-sm">Selector de Fecha de Retiro</h4>
+              <p class="text-[11px] text-amber-200/60">Todos los pedidos se retiran a partir de las 24 horas posteriores al pedido.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-6">
+            <!-- Dial Giratorio para elegir el día de la semana -->
+            <div class="flex flex-col items-center">
+              <span class="text-[10px] font-vintage text-neutral-400 mb-1">DÍA DE ENTREGA</span>
+              <div class="vintage-dial-wrapper">
+                <!-- Ticks graduados -->
+                <div class="dial-tick active" style="transform: rotate(-90deg) translate(0, -40px);"></div>
+                <div class="dial-tick" style="transform: rotate(-45deg) translate(0, -40px);"></div>
+                <div class="dial-tick" style="transform: rotate(0deg) translate(0, -40px);"></div>
+                <div class="dial-tick" style="transform: rotate(45deg) translate(0, -40px);"></div>
+                <div class="dial-tick" style="transform: rotate(90deg) translate(0, -40px);"></div>
+                
+                <div id="date-dial" class="vintage-dial" onclick="rotarDial()"></div>
+              </div>
+            </div>
+            
+            <!-- Pantalla del día seleccionado -->
+            <div class="text-center">
+              <span class="text-[10px] font-vintage text-neutral-400 block mb-1">RECOGER EL:</span>
+              <div id="day-display" class="nixie-display px-4 py-2 text-lg font-bold font-vintage tracking-wider">
+                MAÑANA
+              </div>
+              <span class="text-[9px] text-amber-500 font-vintage mt-1 block">A PARTIR DE LAS 8:00 AM</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SECCIÓN PASTELERÍA: BAJA EN AZÚCAR Y PERSONALIZADA -->
+      <section class="leather-panel rounded-xl p-6">
+        <div class="leather-stitching"></div>
+        
+        <!-- Cabecera de módulo pastelería -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b-2 border-neutral-800/40 pb-4 mb-6 relative z-10">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="bg-emerald-800/80 text-emerald-200 text-xs px-2.5 py-1 rounded font-vintage border border-emerald-600">BAJO EN AZÚCAR</span>
+              <span class="bg-blue-950 text-blue-400 text-[10px] px-2 py-0.5 rounded font-vintage uppercase">Lista Hoy o Personalizada</span>
+            </div>
+            <h2 class="font-serif-vintage text-2xl text-emerald-100 mt-2">La Repostería Consciente</h2>
+            <p class="text-xs text-emerald-200/70 max-w-xl mt-1">Tartas y pasteles elaborados con endulzantes naturales de bajo índice glucémico (monk fruit, eritritol o stevia). Amables con tu salud sin perder el sabor de siempre.</p>
+          </div>
+          
+          <div class="flex items-center gap-3 bg-black/30 p-2.5 rounded-lg border border-white/5">
+            <span class="text-[10px] font-vintage text-emerald-400">VITRINA HOY:</span>
+            <div class="vintage-led active-green" id="pastry-status-led"></div>
+          </div>
+        </div>
+
+        <!-- Pestañas para elegir: "Vitrina Listas" o "Personalizar Torta" -->
+        <div class="flex gap-4 mb-6 relative z-10">
+          <button id="tab-ready" class="button-3d active font-vintage text-xs flex-1 py-3 text-white uppercase text-center" onclick="cambiarPasteleriaModo('ready')">
+            <span class="block text-[8px] text-neutral-400">VITRINA</span>
+            Tortas Listas Hoy
+          </button>
+          <button id="tab-custom" class="button-3d font-vintage text-xs flex-1 py-3 text-white uppercase text-center" onclick="cambiarPasteleriaModo('custom')">
+            <span class="block text-[8px] text-neutral-400">LABORATORIO</span>
+            Personalizar Torta
+          </button>
+        </div>
+
+        <!-- MODO 1: TORTAS LISTAS HOY -->
+        <div id="pastry-ready-section" class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+          
+          <!-- Pastel 1 -->
+          <div class="brushed-metal-panel rounded-lg p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-serif-vintage text-lg text-neutral-100 font-bold">Tarta de Chocolate Belga 70%</h3>
+                <span class="nixie-display px-2 py-0.5 text-sm font-bold">$32.00</span>
+              </div>
+              <p class="text-xs text-neutral-400 mb-2">Bizcocho de cacao orgánico, mousse suave endulzado con eritritol. Libre de harinas refinadas.</p>
+              <div class="flex gap-2 mb-4">
+                <span class="text-[9px] font-vintage bg-green-950 text-green-400 border border-green-800 px-1.5 py-0.5 rounded">KETO FRIENDLY</span>
+                <span class="text-[9px] font-vintage bg-black/30 text-amber-500 px-1.5 py-0.5 rounded">DISPONIBLE HOY: 2 u</span>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center bg-black/40 p-2.5 rounded-md border border-neutral-800">
+              <span class="text-[10px] font-vintage text-neutral-400">PEDIDO AL INSTANTE</span>
+              <button class="button-3d text-xs px-3 py-1 text-white uppercase font-vintage" onclick="agregarPastel('Tarta Chocolate Belga 70%', 32.00, 'Vitrina')">
+                Llevar Hoy
+              </button>
+            </div>
+          </div>
+
+          <!-- Pastel 2 -->
+          <div class="brushed-metal-panel rounded-lg p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-serif-vintage text-lg text-neutral-100 font-bold">Cheesecake de Frutos del Bosque</h3>
+                <span class="nixie-display px-2 py-0.5 text-sm font-bold">$28.50</span>
+              </div>
+              <p class="text-xs text-neutral-400 mb-2">Base crujiente de almendras y coco, crema de queso ligera y jalea casera de frambuesa sin azúcar.</p>
+              <div class="flex gap-2 mb-4">
+                <span class="text-[9px] font-vintage bg-green-950 text-green-400 border border-green-800 px-1.5 py-0.5 rounded">SIN GLUTEN</span>
+                <span class="text-[9px] font-vintage bg-black/30 text-amber-500 px-1.5 py-0.5 rounded">DISPONIBLE HOY: 1 u</span>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center bg-black/40 p-2.5 rounded-md border border-neutral-800">
+              <span class="text-[10px] font-vintage text-neutral-400">PEDIDO AL INSTANTE</span>
+              <button class="button-3d text-xs px-3 py-1 text-white uppercase font-vintage" onclick="agregarPastel('Cheesecake Frutos del Bosque', 28.50, 'Vitrina')">
+                Llevar Hoy
+              </button>
+            </div>
+          </div>
+
+          <!-- Pastel 3 -->
+          <div class="brushed-metal-panel rounded-lg p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-serif-vintage text-lg text-neutral-100 font-bold">Torta de Zanahoria & Nueces</h3>
+                <span class="nixie-display px-2 py-0.5 text-sm font-bold">$25.00</span>
+              </div>
+              <p class="text-xs text-neutral-400 mb-2">Bizcocho especiado súper húmedo con zanahoria rallada, nuez pecana y cobertura suave de coco.</p>
+              <div class="flex gap-2 mb-4">
+                <span class="text-[9px] font-vintage bg-green-950 text-green-400 border border-green-800 px-1.5 py-0.5 rounded">100% VEGANA</span>
+                <span class="text-[9px] font-vintage bg-black/30 text-amber-500 px-1.5 py-0.5 rounded">DISPONIBLE HOY: 3 u</span>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center bg-black/40 p-2.5 rounded-md border border-neutral-800">
+              <span class="text-[10px] font-vintage text-neutral-400">PEDIDO AL INSTANTE</span>
+              <button class="button-3d text-xs px-3 py-1 text-white uppercase font-vintage" onclick="agregarPastel('Torta de Zanahoria Vegana', 25.00, 'Vitrina')">
+                Llevar Hoy
+              </button>
+            </div>
+          </div>
+
+          <!-- Pastel 4 -->
+          <div class="brushed-metal-panel rounded-lg p-4 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-serif-vintage text-lg text-neutral-100 font-bold">Lemon Pie Sin Azúcar</h3>
+                <span class="nixie-display px-2 py-0.5 text-sm font-bold">$22.00</span>
+              </div>
+              <p class="text-xs text-neutral-400 mb-2">Crumble de avena, curd de limón natural súper ácido y refrescante, y merengue tostado de alulosa.</p>
+              <div class="flex gap-2 mb-4">
+                <span class="text-[9px] font-vintage bg-green-950 text-green-400 border border-green-800 px-1.5 py-0.5 rounded">BAJO ÍNDICE GLUCÉMICO</span>
+                <span class="text-[9px] font-vintage bg-black/30 text-amber-500 px-1.5 py-0.5 rounded">DISPONIBLE HOY: 2 u</span>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center bg-black/40 p-2.5 rounded-md border border-neutral-800">
+              <span class="text-[10px] font-vintage text-neutral-400">PEDIDO AL INSTANTE</span>
+              <button class="button-3d text-xs px-3 py-1 text-white uppercase font-vintage" onclick="agregarPastel('Lemon Pie Sin Azúcar', 22.00, 'Vitrina')">
+                Llevar Hoy
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- MODO 2: LABORATORIO DE PERSONALIZACIÓN -->
+        <div id="pastry-custom-section" class="hidden brushed-metal-panel rounded-lg p-6 relative z-10">
+          <h3 class="font-serif-vintage text-xl text-neutral-200 mb-2 text-center border-b border-neutral-800 pb-2">CONSOLA SINTETIZADORA DE TORTAS</h3>
+          <p class="text-xs text-neutral-400 text-center mb-6">Ajusta los interruptores, faders y potenciómetros para programar la torta saludable ideal para ti.</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- PANEL 1: BIZCOCHO & RELLENO (Interruptores Físicos) -->
+            <div class="bg-black/40 p-4 rounded-lg border border-neutral-800">
+              <h4 class="font-vintage text-xs text-amber-500 uppercase tracking-wider mb-4 border-b border-neutral-800 pb-1">1. Base & Corazón</h4>
+              
+              <!-- Selector Base -->
+              <div class="space-y-4">
+                <div>
+                  <span class="text-[11px] font-vintage text-neutral-400 block mb-2">TIPO DE BIZCOCHO:</span>
+                  <div class="flex flex-col gap-2">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                      <div class="toggle-switch" id="toggle-base-harina" onclick="toggleSwitch('base-harina')">
+                        <div class="toggle-lever"></div>
+                      </div>
+                      <span class="text-xs font-vintage text-neutral-200">Almendra & Coco (Keto)</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer">
+                      <div class="toggle-switch on" id="toggle-base-avena" onclick="toggleSwitch('base-avena')">
+                        <div class="toggle-lever"></div>
+                      </div>
+                      <span class="text-xs font-vintage text-neutral-200">Avena Integral (Apto Celíacos)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Relleno -->
+                <div class="pt-2 border-t border-neutral-800">
+                  <span class="text-[11px] font-vintage text-neutral-400 block mb-2">RELLENO:</span>
+                  <div class="flex flex-col gap-2">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                      <div class="toggle-switch on" id="toggle-fill-fruto" onclick="toggleSwitch('fill-fruto')">
+                        <div class="toggle-lever"></div>
+                      </div>
+                      <span class="text-xs font-vintage text-neutral-200">Crema de Frutos Rojos</span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer">
+                      <div class="toggle-switch" id="toggle-fill-choco" onclick="toggleSwitch('fill-choco')">
+                        <div class="toggle-lever"></div>
+                      </div>
+                      <span class="text-xs font-vintage text-neutral-200">Mousse Cacao 70%</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 2: AZÚCAR / ENDULZANTE (Faders Esqueumórficos) -->
+            <div class="bg-black/40 p-4 rounded-lg border border-neutral-800 flex flex-col justify-between">
+              <div>
+                <h4 class="font-vintage text-xs text-amber-500 uppercase tracking-wider mb-4 border-b border-neutral-800 pb-1">2. Mezclador de Dulzor</h4>
+                <p class="text-[10px] text-neutral-500 mb-4">Ajusta el fader analógico para programar la intensidad del sabor dulce orgánico.</p>
+              </div>
+
+              <!-- Fader físico -->
+              <div class="flex items-center justify-around h-36 bg-neutral-950 rounded-md p-4 border border-neutral-900 relative">
+                <!-- Graduaciones del fader -->
+                <div class="flex flex-col justify-between h-full text-[8px] font-vintage text-neutral-500 pr-2 select-none">
+                  <span>MAX</span>
+                  <span>MED</span>
+                  <span>MIN</span>
+                  <span>ZERO</span>
+                </div>
+
+                <!-- Canal del Fader -->
+                <div class="fader-track w-4 h-full rounded-full cursor-pointer flex items-end justify-center" id="sweetness-track" onclick="moveFader(event)">
+                  <div class="fader-knob w-8 h-6 rounded absolute" id="sweetness-knob" style="bottom: 40px; left: 50%; transform: translateX(-50%);"></div>
+                </div>
+
+                <!-- Pantalla lectura de fader -->
+                <div class="flex flex-col items-center pl-2">
+                  <span class="text-[8px] font-vintage text-neutral-400 mb-1">ENDULZANTE</span>
+                  <div id="fader-display" class="nixie-display px-2 py-1 text-xs font-bold font-vintage">
+                    MONK FRUIT
+                  </div>
+                  <span id="fader-percentage" class="text-[9px] text-amber-500 font-vintage mt-1">NIVEL: 40%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 3: DECORACIÓN / COBERTURA (Botones Vintage) -->
+            <div class="bg-black/40 p-4 rounded-lg border border-neutral-800 flex flex-col justify-between">
+              <div>
+                <h4 class="font-vintage text-xs text-amber-500 uppercase tracking-wider mb-4 border-b border-neutral-800 pb-1">3. Coberturas</h4>
+                <p class="text-[10px] text-neutral-500 mb-4">Selecciona los botones de disparo rápido para agregar acabados físicos.</p>
+              </div>
+
+              <!-- Botones retro redondos -->
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-vintage text-neutral-300">Merengue de Alulosa</span>
+                  <div class="flex items-center gap-2">
+                    <div id="led-dec-merengue" class="vintage-led"></div>
+                    <button id="btn-dec-merengue" class="push-button-round" onclick="toggleDecoration('merengue')"></button>
+                  </div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-vintage text-neutral-300">Nueces & Almendras</span>
+                  <div class="flex items-center gap-2">
+                    <div id="led-dec-nueces" class="vintage-led active-amber"></div>
+                    <button id="btn-dec-nueces" class="push-button-round active" onclick="toggleDecoration('nueces')"></button>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-vintage text-neutral-300">Fruta Fresca de Temporada</span>
+                  <div class="flex items-center gap-2">
+                    <div id="led-dec-frutas" class="vintage-led"></div>
+                    <button id="btn-dec-frutas" class="push-button-round" onclick="toggleDecoration('frutas')"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- BOTÓN GENERAR TORTA -->
+          <div class="mt-6 pt-4 border-t border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="text-left">
+              <span class="text-[10px] font-vintage text-neutral-500 block">ESTIMACIÓN DE FÓRMULA</span>
+              <span class="text-sm font-vintage text-emerald-400 font-bold">Pastel Personalizado de 1kg (Rendimiento 8 porciones)</span>
+            </div>
+            
+            <button class="button-3d px-8 py-3 text-white uppercase font-vintage text-xs font-bold" onclick="cargarTortaPersonalizada()">
+              Sintetizar & Agregar por $45.00
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- COLUMNA DERECHA: RECEPTOR DE PEDIDOS / RECIBO DE COMPRA (ESTILO FACTURADORA VINTAGE) -->
+    <div class="lg:col-span-4">
+      <div class="brushed-metal-panel rounded-xl p-5 sticky top-6">
+        
+        <!-- Detalle decorativo de ranura de ticket -->
+        <div class="ventilation-grille h-4 w-full rounded mb-1"></div>
+        
+        <!-- Recibo de papel antiguo -->
+        <div class="vintage-receipt p-5 rounded-b-sm relative pb-8">
+          
+          <!-- Orificio de desgarro de papel superior -->
+          <div class="absolute top-0 left-0 right-0 h-1 bg-neutral-900/10"></div>
+          
+          <div class="text-center border-b border-dashed border-neutral-400 pb-4 mb-4">
+            <h3 class="font-serif-vintage text-xl font-bold tracking-tight text-neutral-800">Masa & Esencia</h3>
+            <p class="font-vintage text-[10px] text-neutral-600 uppercase">Orden de Producción Saludable</p>
+            <p class="font-vintage text-[9px] text-neutral-500" id="ticket-date">FECHA: 16-07-2026</p>
+          </div>
+
+          <!-- Lista de Items en Recibo -->
+          <div class="space-y-3 font-vintage text-xs text-neutral-700 min-h-[150px]" id="order-items-list">
+            <!-- Los items agregados aparecerán aquí dinámicamente -->
+            <p class="text-center text-neutral-500 italic py-8">La ticketera está vacía.<br>Selecciona productos a la izquierda para iniciar la comanda.</p>
+          </div>
+
+          <!-- Total e Impuestos -->
+          <div class="border-t border-dashed border-neutral-400 pt-3 mt-4 space-y-1 font-vintage text-xs text-neutral-800">
+            <div class="flex justify-between">
+              <span>SUBTOTAL:</span>
+              <span id="ticket-subtotal">$0.00</span>
+            </div>
+            <div class="flex justify-between text-[11px] text-neutral-500">
+              <span>REDUCCIÓN SALUDABLE:</span>
+              <span>- $0.00 (Promo)</span>
+            </div>
+            <div class="flex justify-between font-bold text-sm border-t border-neutral-300 pt-2 text-neutral-900">
+              <span>TOTAL ORDEN:</span>
+              <span id="ticket-total">$0.00</span>
+            </div>
+          </div>
+
+          <!-- Sello de Garantía Esqueumórfico -->
+          <div class="mt-6 flex justify-center">
+            <div class="border-4 border-dashed border-red-700 text-red-700 px-3 py-1 rotate-[-4deg] font-vintage text-[11px] font-bold rounded uppercase tracking-wider">
+              100% Orgánico • Sourdough
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Ranura de salida de ticket inferior -->
+        <div class="torn-edge -mt-1.5 relative z-10"></div>
+
+        <!-- Botones físicos de pago y envío de comanda -->
+        <div class="mt-6 space-y-4">
+          <div class="bg-black/30 p-3 rounded-lg border border-white/5 flex justify-between items-center">
+            <span class="text-[10px] font-vintage text-neutral-400 block">DESPACHO AUTOMÁTICO</span>
+            <div class="flex items-center gap-1">
+              <span class="text-[10px] font-vintage text-neutral-400 mr-1">TIPO:</span>
+              <span class="nixie-display text-xs px-2 py-0.5">LOCAL</span>
+            </div>
+          </div>
+
+          <!-- Botón de Envío Principal (Estilo Transmisor de Radio) -->
+          <button class="button-3d w-full py-4 text-white uppercase font-vintage text-xs font-bold tracking-wider flex items-center justify-center gap-2" style="background: linear-gradient(180deg, #b87c28 0%, #7d4d0f 100%); border-color: #5c3707; box-shadow: 0 6px 0px #3a2204, 0 8px 15px rgba(0, 0, 0, 0.6);" onclick="procesarOrden()">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            Transmitir Comanda al Horno
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SECCIÓN FOOTER / TABLERO ESTÁTICO DE INFORMACIÓN -->
+  <footer class="max-w-7xl mx-auto mt-12 px-4">
+    <div class="brushed-metal-panel rounded-xl p-6 text-center border-t-8 border-neutral-900">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-5xl mx-auto">
+        <div class="bg-black/30 p-4 rounded-lg border border-neutral-800">
+          <h4 class="font-serif-vintage text-amber-500 font-bold mb-2">Nuestro Manifiesto</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            Creemos que la panadería debe volver a sus raíces de fermentación natural con levaduras salvajes. En pastelería, rompemos con la tiranía del azúcar procesado para entregarte postres que nutren tu cuerpo y acarician tu paladar.
+          </p>
+        </div>
+        
+        <div class="bg-black/30 p-4 rounded-lg border border-neutral-800">
+          <h4 class="font-serif-vintage text-amber-500 font-bold mb-2">Horarios & Tiempos</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed font-vintage">
+            LUNES A SÁBADO: 08:00 AM - 08:00 PM<br>
+            DOMINGOS: 09:00 AM - 06:00 PM<br><br>
+            * Panes de Masa Madre requieren 24 horas de aviso previo.
+          </p>
+        </div>
+
+        <div class="bg-black/30 p-4 rounded-lg border border-neutral-800">
+          <h4 class="font-serif-vintage text-amber-500 font-bold mb-2">Señal del Laboratorio</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            Ubicados en el Distrito del Sabor Saludable. Ven por tus tortas listas de la vitrina o personaliza la tuya mediante nuestra terminal analógica en tiempo real.
+          </p>
+          <div class="flex gap-2 mt-3">
+            <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+            <span class="text-[10px] font-vintage text-neutral-400">ENLACE ACTIVO CON COCINA CENTRAL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-neutral-800 text-center">
+        <p class="font-vintage text-[11px] text-neutral-500">
+          © 2026 MASA & ESENCIA CORP. DISEÑO ESQUEUMÓRFICO DE TABLERO DE AUDIO. TODOS LOS DERECHOS RESERVADOS.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- NOTIFICACIÓN DE PROCESAMIENTO (Modal Vintage) -->
+  <div id="modal-notificacion" class="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 hidden">
+    <div class="brushed-metal-panel max-w-md w-full p-6 text-center border-4 border-amber-600 rounded-xl">
+      <div class="brass-bezel w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center">
+        <i data-lucide="check-circle" class="w-8 h-8 text-amber-500"></i>
+      </div>
+      <h3 class="font-serif-vintage text-2xl text-neutral-100 font-bold mb-2" id="modal-title">¡CONEXIÓN ENVIADA!</h3>
+      <p class="text-xs text-neutral-400 mb-6 font-vintage" id="modal-message">
+        Tu comanda ha sido transmitida a los transistores de nuestros hornos de piedra. ¡El pan y las tortas están en camino!
+      </p>
+      <button class="button-3d px-6 py-2.5 text-white uppercase font-vintage text-xs" onclick="cerrarModal()">
+        Cerrar Panel
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Inicializar Lucide Icons
+    lucide.createIcons();
+
+    // Estado global de la Orden (Carrito)
+    let orderList = [];
+    let sweetLevel = 40; // Nivel del fader de endulzante
+    let sweetType = 'MONK FRUIT';
+    let selectedDayIndex = 0; // 0 = Mañana, 1 = Pasado Mañana, 2 = Sábado, 3 = Próx. Lunes
+    const daysOfDelivery = ['MAÑANA', 'PASADO MAÑANA', 'FIN DE SEMANA', 'PRÓX. LUNES'];
+    
+    // Configuración inicial de interruptores del configurador de tortas
+    let customCakeState = {
+      base: 'Avena Integral (Apto Celíacos)',
+      fill: 'Crema de Frutos Rojos',
+      decorations: ['Nueces & Almendras']
+    };
+
+    // Al cargar la página, inicializar hora y animaciones
+    window.onload = function() {
+      // Establecer fecha de hoy en el recibo
+      const today = new Date();
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      document.getElementById('ticket-date').innerText = 'FECHA: ' + today.toLocaleDateString('es-ES', options).replace(/\//g, '-');
+      
+      // Animación ligera del VU Meter (Aguja de Presión)
+      setInterval(() => {
+        const needle = document.getElementById('vu-needle');
+        if(needle) {
+          const randomRotation = -50 + Math.random() * 40; // Oscila entre -50 y -10 grados
+          needle.style.transform = `rotate(${randomRotation}deg)`;
+        }
+      }, 800);
+    };
+
+    // --- MANEJO DE PANADERÍA ---
+
+    // Rotación del Dial de Fecha
+    function rotarDial() {
+      selectedDayIndex = (selectedDayIndex + 1) % daysOfDelivery.length;
+      const deg = selectedDayIndex * 45 - 90; // Mapea los días a ángulos físicos del dial
+      const dial = document.getElementById('date-dial');
+      dial.style.transform = `rotate(${deg}deg)`;
+
+      // Actualizar visualización en el panel
+      document.getElementById('day-display').innerText = daysOfDelivery[selectedDayIndex];
+
+      // Actualizar clases activas en los ticks del dial
+      const ticks = document.querySelectorAll('.dial-tick');
+      ticks.forEach((tick, idx) => {
+        if(idx === selectedDayIndex) {
+          tick.classList.add('active');
+        } else {
+          tick.classList.remove('active');
+        }
+      });
+    }
+
+    // Agregar Pan de Masa Madre al Recibo (Requiere fecha)
+    function agregarPan(name, price) {
+      const deliveryDay = daysOfDelivery[selectedDayIndex];
+      const uniqueId = 'pan-' + Date.now();
+      
+      orderList.push({
+        id: uniqueId,
+        name: `${name} (Reserva para: ${deliveryDay})`,
+        price: price,
+        type: 'Panadería'
+      });
+
+      renderOrder();
+      animarBotonYLED('bake-status-led', 'active-amber');
+    }
+
+    // --- MANEJO DE PASTELERÍA ---
+
+    // Alternar modos en pastelería: Tortas Listas (Vitrina) vs Laboratorio de Personalización
+    function cambiarPasteleriaModo(mode) {
+      const readySec = document.getElementById('pastry-ready-section');
+      const customSec = document.getElementById('pastry-custom-section');
+      const tabReady = document.getElementById('tab-ready');
+      const tabCustom = document.getElementById('tab-custom');
+
+      if (mode === 'ready') {
+        readySec.classList.remove('hidden');
+        customSec.classList.add('hidden');
+        tabReady.classList.add('active');
+        tabCustom.classList.remove('active');
+      } else {
+        readySec.classList.add('hidden');
+        customSec.classList.remove('hidden');
+        tabReady.classList.remove('active');
+        tabCustom.classList.add('active');
+      }
+    }
+
+    // Agregar pastel listo de vitrina
+    function agregarPastel(name, price, origin) {
+      const uniqueId = 'pastel-' + Date.now();
+      orderList.push({
+        id: uniqueId,
+        name: `${name} (${origin})`,
+        price: price,
+        type: 'Pastelería'
+      });
+
+      renderOrder();
+      animarBotonYLED('pastry-status-led', 'active-green');
+    }
+
+    // Alternar interruptor físico de la consola de personalización
+    function toggleSwitch(id) {
+      const element = document.getElementById('toggle-' + id);
+      element.classList.toggle('on');
+
+      // Actualizar el estado de la receta de torta
+      if (id === 'base-harina') {
+        document.getElementById('toggle-base-avena').classList.remove('on');
+        customCakeState.base = 'Almendra & Coco (Keto)';
+      } else if (id === 'base-avena') {
+        document.getElementById('toggle-base-harina').classList.remove('on');
+        customCakeState.base = 'Avena Integral (Apto Celíacos)';
+      } else if (id === 'fill-fruto') {
+        document.getElementById('toggle-fill-choco').classList.remove('on');
+        customCakeState.fill = 'Crema de Frutos Rojos';
+      } else if (id === 'fill-choco') {
+        document.getElementById('toggle-fill-fruto').classList.remove('on');
+        customCakeState.fill = 'Mousse Cacao 70%';
+      }
+    }
+
+    // Control del fader de endulzante
+    function moveFader(event) {
+      const track = document.getElementById('sweetness-track');
+      const knob = document.getElementById('sweetness-knob');
+      const rect = track.getBoundingClientRect();
+      const height = rect.height;
+      
+      // Calcular posición del clic o toque relativo al track
+      let clickY = event.clientY - rect.top;
+      if (clickY < 0) clickY = 0;
+      if (clickY > height) clickY = height;
+
+      // Invertir para que bottom sea 100% y top sea 0%
+      const percentage = Math.round(((height - clickY) / height) * 100);
+      sweetLevel = percentage;
+
+      // Mover botón físicamente
+      knob.style.bottom = `${percentage}%`;
+      knob.style.transform = 'translate(-50%, 50%)';
+
+      // Determinar tipo de endulzante basado en fader analógico
+      if (percentage < 25) {
+        sweetType = 'STEVIA pura';
+      } else if (percentage < 60) {
+        sweetType = 'MONK FRUIT';
+      } else {
+        sweetType = 'ERITRITOL org';
+      }
+
+      document.getElementById('fader-display').innerText = sweetType;
+      document.getElementById('fader-percentage').innerText = `NIVEL: ${percentage}%`;
+    }
+
+    // Alternar botones redondos retro para coberturas/decoración
+    function toggleDecoration(id) {
+      const btn = document.getElementById('btn-dec-' + id);
+      const led = document.getElementById('led-dec-' + id);
+      
+      btn.classList.toggle('active');
+      led.classList.toggle('active-amber');
+
+      const nameMap = {
+        'merengue': 'Merengue de Alulosa',
+        'nueces': 'Nueces & Almendras',
+        'frutas': 'Fruta Fresca de Temporada'
+      };
+
+      const decName = nameMap[id];
+      const index = customCakeState.decorations.indexOf(decName);
+      
+      if (index > -1) {
+        customCakeState.decorations.splice(index, 1);
+      } else {
+        customCakeState.decorations.push(decName);
+      }
+    }
+
+    // Agregar torta construida en el sintetizador
+    function cargarTortaPersonalizada() {
+      const name = `Torta Personalizada [${customCakeState.base}, Relleno: ${customCakeState.fill}, Endulzado: ${sweetType} (${sweetLevel}%), Dec: ${customCakeState.decorations.join(' + ') || 'Simple'}]`;
+      const uniqueId = 'pastel-custom-' + Date.now();
+      
+      orderList.push({
+        id: uniqueId,
+        name: name,
+        price: 45.00,
+        type: 'Pastelería Personalizada'
+      });
+
+      renderOrder();
+      animarBotonYLED('pastry-status-led', 'active-green');
+      
+      // Lanzar pequeño efecto de flash en leds decorativos
+      let flashCount = 0;
+      const interval = setInterval(() => {
+        document.getElementById('led-dec-merengue').classList.toggle('active-amber');
+        document.getElementById('led-dec-nueces').classList.toggle('active-amber');
+        document.getElementById('led-dec-frutas').classList.toggle('active-amber');
+        flashCount++;
+        if(flashCount > 6) {
+          clearInterval(interval);
+          // Restaurar a sus estados reales
+          document.getElementById('led-dec-merengue').className = 'vintage-led ' + (customCakeState.decorations.includes('Merengue de Alulosa') ? 'active-amber' : '');
+          document.getElementById('led-dec-nueces').className = 'vintage-led ' + (customCakeState.decorations.includes('Nueces & Almendras') ? 'active-amber' : '');
+          document.getElementById('led-dec-frutas').className = 'vintage-led ' + (customCakeState.decorations.includes('Fruta Fresca de Temporada') ? 'active-amber' : '');
+        }
+      }, 150);
+    }
+
+    // --- CONTROL DE RENDERIZACIÓN DE LA COMPRA (RECIBO) ---
+
+    function eliminarItem(id) {
+      orderList = orderList.filter(item => item.id !== id);
+      renderOrder();
+    }
+
+    function renderOrder() {
+      const listContainer = document.getElementById('order-items-list');
+      
+      if (orderList.length === 0) {
+        listContainer.innerHTML = `<p class="text-center text-neutral-500 italic py-8">La ticketera está vacía.<br>Selecciona productos a la izquierda para iniciar la comanda.</p>`;
+        document.getElementById('ticket-subtotal').innerText = '$0.00';
+        document.getElementById('ticket-total').innerText = '$0.00';
+        return;
+      }
+
+      let html = '';
+      let subtotal = 0;
+
+      orderList.forEach(item => {
+        subtotal += item.price;
+        html += `
+          <div class="flex justify-between items-start border-b border-neutral-300/40 pb-2 mb-2">
+            <div class="pr-2 max-w-[80%]">
+              <span class="block font-bold text-neutral-800">${item.name}</span>
+              <span class="text-[9px] text-neutral-500 uppercase tracking-widest">${item.type}</span>
+            </div>
+            <div class="text-right flex flex-col items-end">
+              <span class="font-bold text-neutral-900">$${item.price.toFixed(2)}</span>
+              <button class="text-[9px] text-red-700 underline font-vintage hover:text-red-900 mt-1" onclick="eliminarItem('${item.id}')">
+                Eliminar
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      listContainer.innerHTML = html;
+      
+      // Cálculo de total
+      const total = subtotal;
+      document.getElementById('ticket-subtotal').innerText = `$${subtotal.toFixed(2)}`;
+      document.getElementById('ticket-total').innerText = `$${total.toFixed(2)}`;
+    }
+
+    // Efecto de feedback visual rápido en luces analógicas
+    function animarBotonYLED(ledId, activeClass) {
+      const led = document.getElementById(ledId);
+      led.classList.remove(activeClass);
+      setTimeout(() => {
+        led.classList.add(activeClass);
+      }, 100);
+    }
+
+    // --- PROCESAMIENTO DE COMPRA ---
+
+    function procesarOrden() {
+      if (orderList.length === 0) {
+        mostrarModal("CONSOLA VACÍA", "Por favor ingresa productos para poder disparar el horneado de comanda.");
+        return;
+      }
+
+      // Preparar mensaje de resumen de lo enviado a hornos
+      let resumen = "Sintonizando frecuencias de cocción... Se ha enviado la siguiente comanda:\n\n";
+      orderList.forEach((item, index) => {
+        resumen += `${index + 1}. ${item.name} - $${item.price.toFixed(2)}\n`;
+      });
+      resumen += `\nTotal de transmisión: ${document.getElementById('ticket-total').innerText}.\n\n¡Nuestros artesanos han iniciado el precalentamiento!`;
+
+      mostrarModal("TRANSMISIÓN EXITOSA", resumen);
+      
+      // Vaciar orden tras el envío exitoso
+      orderList = [];
+      renderOrder();
+    }
+
+    // Ventana modal retro de aviso
+    function mostrarModal(title, message) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-message').innerText = message;
+      document.getElementById('modal-notificacion').classList.remove('hidden');
+    }
+
+    function cerrarModal() {
+      document.getElementById('modal-notificacion').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
